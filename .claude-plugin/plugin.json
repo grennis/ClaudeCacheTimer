@@ -1,0 +1,1 @@
+{ "name": "cache-timer", "version": "0.1.0", "description": "Counts down the 60-minute prompt cache TTL since the last model response", "types": "./types/index.d.ts" }
