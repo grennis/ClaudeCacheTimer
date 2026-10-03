@@ -22,6 +22,7 @@ export const register: Register = on => {
 
   on('session.start', async ($, e, next) => {
     const result = await next(e)
+    $.ui.status(undefined)
 
     $.clock.every(1000, async () => {
       const t = await $.clock.now()
@@ -29,12 +30,10 @@ export const register: Register = on => {
 
       const last = await read($, lastAt)
       if (last === null) {
-        $.ui.status(undefined)
         return
       }
 
       const left = last + TTL_MS - t
-      $.ui.status(left > 0 ? `cache ${format(left)}` : 'cache expired')
 
       if (left <= WARN_MS && left > 0 && !warned) {
         warned = true
